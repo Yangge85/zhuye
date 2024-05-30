@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <script src="./js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_4256747_4fn7qe8iiqb.js">
+    <script src="https://at.alicdn.com/t/c/font_4256747_45xccibd63k.js"></script>
+    <title>欢迎来到YGG学前端</title>
+
+    <script>
+        // 检查是否已经访问过页面
+        var hasVisited = sessionStorage.getItem("hasVisited");
+
+        if (!hasVisited) {
+            // 如果是第一次访问，执行刷新并记录访问状态
+            window.location.reload(true); // true 参数表示强制从服务器重新加载页面
+            sessionStorage.setItem("hasVisited", "true");
+        }
+    </script>
+    <style>
+        .osc_pro_color {
+            color: #eae9d7 !important;
+        }
+
+        .osc_panel_color {
+            background-color: #2e2f29 !important;
+        }
+
+        .osc_background_color {
+            background-color: #272822 !important;
+        }
+
+        .osc_border_color {
+            border-color: #484a45 !important;
+        }
+
+        .osc_desc_color {
+            color: #eae9d7 !important;
+        }
+
+        .osc_link_color * {
+            color: #747571 !important;
+        }
+    </style>
+    <style>
+        * {
+            box-sizing: border-box;
+            max-width: 768px;
+            user-select: none;
+
+        }
+
+
+
+        /* 使用媒体查询以适应小屏幕设备 */
+        @media (max-width: 380px) {
+            .container {
+                min-width: 100%;
+            }
+
+            .link {
+                width: 100%;
+            }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            /* padding: 10px 0; */
+            text-align: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1;
+        }
+
+        header a {
+            /* scale: 0.3; */
+            position: absolute;
+            top: 0;
+            left: 0;
+
+        }
+
+        .time {
+
+
+            display: flex;
+
+            margin-top: 5px;
+            display: block;
+            background-color: #ca1616;
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* justify-content: space-between; */
+
+        }
+
+        .time span {}
+
+        .shenti {
+            margin-top: 100px;
+            z-index: 0;
+            position: relative;
+        }
+
+        /* 百度搜索 */
+
+
+        .searchfa {
+
+
+            margin: 0 auto;
+            text-align: center;
+            max-width: 400px;
+            margin-bottom: 20px;
+
+        }
+
+
+
+        /* 可选的样式，可以根据需要自行调整 */
+        #searchQuery {
+            top: 300px;
+            width: 45%;
+            padding: 5px;
+            font-size: 18px;
+            /* 可以添加内边距来增加输入框的大小 */
+        }
+
+        .accordion {
+            z-index: 0;
+        }
+
+        .accordion-item {
+            /* font-size: larger; */
+            /* margin: 0 auto; */
+            width: 100%;
+
+            z-index: 0;
+        }
+
+        .accordion-header {
+            /* display: block; */
+            /* text-align: center; */
+            z-index: 0;
+        }
+
+        .accordion-button {
+            text-align: center;
+            font-size: 18px;
+            z-index: 0;
+        }
+
+        #searchbtn {
+            width: 22%;
+            padding: 5px 10px;
+            font-size: 18px;
+            /* 可以添加内边距来增加按钮的大小 */
+        }
+
+        .leg {
+
+            height: 50px;
+
+        }
+
+        footer {
+            display: flex;
+            width: 100%;
+            height: 30px;
+            align-items: center;
+            justify-content: center;
+            background-color: #333;
+            position: fixed;
+            bottom: 0;
+            color: #bbb;
+
+
+
+        }
+
+
+
+        h1 {
+
+            font-size: 30px;
+            text-shadow: 1px 1px 0px #ddd,
+                -1px 2px 0px #bbb,
+                4px -7px 0px #111;
+
+
+        }
+
+
+        h2 {
+            margin-left: 10%;
+        }
+
+        .icon {
+
+            width: 18px;
+            height: 18px;
+            line-height: 18px;
+
+        }
+
+        .container {
+
+            /* font-size: 50px; */
+            /* width: 18px; */
+            /* height: 18px; */
+            line-height: 18px;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+
+            align-items: left;
+            justify-content: center;
+
+        }
+
+        .link {
+            width: 70%;
+
+            /* 两列布局，留一些间隙 */
+
+            text-align: center;
+
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            padding-left: 10px;
+            font-size: 18px;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.2s;
+            font-weight: 400;
+            line-height: 20px;
+        }
+
+        .link:hover {
+            transform: scale(1.05);
+            /* 滑过时放大一点点 */
+        }
+
+        .box {
+            display: flex;
+
+            position: relative;
+            top: 0;
+            right: 0;
+        }
+
+        .M1 {
+            width: 2px;
+            height: 10px;
+            background-color: firebrick;
+            /* border-radius: 20px; */
+            transform: translate(200px) skew(0deg);
+            border: 1px solid #000;
+            ;
+        }
+
+        .M2 {
+            width: 2px;
+            height: 15px;
+            /* background-color: firebrick; */
+            /* border-radius: 20px; */
+            transform: translate(200px) skew(0deg);
+            border: 1px solid #000;
+            ;
+        }
+
+        .M3 {
+            width: 2px;
+            height: 20px;
+            /* background-color: firebrick; */
+            /* border-radius: 20px; */
+            transform: translate(200px) skew(0deg);
+            border: 1px solid #000;
+            ;
+        }
+
+        .leg {
+            margin: 0 auto;
+            text-align: center;
+            padding-bottom: 50px;
+
+        }
+
+        .leg1 {
+
+            margin: 0 auto;
+            text-align: center;
+            padding-bottom: 50px;
+        }
+
+        .leg1 .leg2 {
+            margin: 0 auto;
+
+            width: 300px;
+            text-align: left;
+            text-indent: 2em;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+
+
+        .leg1 .leg2 .legday {
+            text-align: right;
+            margin: 0 auto;
+
+
+            width: 300px;
+
+            text-indent: 2em;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        iframe {
+            width: 280px;
+            height: 800px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 style="width: auto ;height: 80px; line-height: 80px;">欢迎来到YGG学前端</h1>
+        <!-- <a href='QQ29521510'><img
+                src='	https://gitee.com/static/images/logo-black.svg?t=158106664' alt='star'></img></a> -->
+        <div class="time"><span> YGG&reg; &nbsp; </span></div>
+        <div class="caise">
+
+        </div>
+
+    </header>
+
+
+    <div class="shenti">
+
+        <div class="searchfa">
+
+            <div class="search">
+                <!-- 输入框 -->
+                <input type="text" id="searchQuery" placeholder="请输入关键词">
+
+                <!-- 搜索按钮 -->
+                <button id="searchbtn" onclick="searchBaidu()">百度</button>
+            </div>
+        </div>
+
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        精品课程推荐
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="container">
+                        <h2></h2>
+                        <div class="links">
+                            <!-- 链接1 -->
+                            <a class="link"
+                                href="https://www.bilibili.com/video/BV1kM4y127Li?p=1&vd_source=6b6b55f40873aa842b6a52b4efbc6e09">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-html1"></use>
+                                </svg>HTML-黑马程序员</a>
+                            <!-- 链接2 -->
+                            <a class="link"
+                                href="https://www.bilibili.com/video/BV1kM4y127Li?p=29&vd_source=6b6b55f40873aa842b6a52b4efbc6e09"><svg
+                                    class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-CSS"></use>
+                                </svg>CSS-黑马程序员</a>
+
+                            <!-- 链接3 -->
+                            <a class="link"
+                                href="https://www.bilibili.com/video/BV1Y84y1L7Nn/?spm_id_from=333.788.recommend_more_video.4&vd_source=6b6b55f40873aa842b6a52b4efbc6e09"><svg
+                                    class="
+                                icon" aria-hidden="true">
+                                    <use xlink:href="#icon-javascript"></use>
+                                </svg>JavaScript-黑马程序员
+                            </a>
+                            <!-- 链接4 -->
+                            <!-- <a class=" link" href="link4.html">链接4</a> -->
+                            <!-- 链接5 -->
+                            <!-- <a class="link" href="link5.html">链接5</a> -->
+                            <!-- 链接6 -->
+                            <!-- <a class="link" href="link6.html">链接6</a> -->
+                            <!-- 链接7 -->
+                            <!-- <a class="link" href="link7.html">链接7</a> -->
+                            <!-- 链接8 -->
+                            <!-- <a class="link" href="link8.html">链接8</a> -->
+                            <!-- 链接9 -->
+                            <!-- <a class="link" href="link9.html">链接9</a> -->
+                            <!-- 链接10 -->
+                            <!-- <a class="link" href="link10.html">链接10</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        开发工具
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="container">
+                        <h2></h2>
+                        <div class="links">
+                            <!-- 链接1 -->
+                            <a class="link" href="https://www.bootcss.com/">Bootstrap框架
+                            </a>
+                            <!-- 链接2 -->
+                            <a class="link" href="https://developer.mozilla.org/zh-CN/">MDN文档查询
+                            </a>
+                            <!-- 链接3 -->
+                            <a class="link" href="https://cn.vuejs.org/">Vue.js</a>
+
+                            <!-- 链接4 -->
+                            <a class="link" href="https://code.visualstudio.com/">VSCode</a>
+                            <!-- 链接5 -->
+                            <a class="link" href="https://nodejs.cn/">Node.js</a>
+
+                            <!-- 链接6 -->
+                            <a class="link" href="https://www.iconfont.cn/">阿里巴巴IconFont</a>
+                            <!-- 链接7 -->
+                            <a class="link" href="https://uniapp.dcloud.net.cn/">Uni app</a>
+                            <!-- 链接8 -->
+                            <a class="link" href="https://gitee.com/">Gitee代码托管平台</a>
+                            <!-- 链接9 -->
+                            <a class="link" href="https://www.w3school.com.cn/index.html">W3school</a>
+                            <!-- 链接10 -->
+                            <a class="link" href="https://www.fancynode.com.cn/pxcook">像素大厨PxCook</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                        AI专区
+                    </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="container">
+                        <h2></h2>
+                        <div class="links">
+                            <!-- 链接1 -->
+                            <a class="link" href="https://www.aigc.cn//">AIGC导航
+                            </a>
+                            <!-- 链接2 -->
+                            <a class="link" href="https://chat.openai.com/">ChatGPT</a>
+                            <!-- 链接3 -->
+                            <a class="link" href="https://www.liblib.ai/">哩布哩布AI
+                            </a>
+                            <!-- 链接4 -->
+                            <a class="link"
+                                href="https://www.bilibili.com/video/BV1iM4y1y7oA/?spm_id_from=333.999.0.0&vd_source=6b6b55f40873aa842b6a52b4efbc6e09">Stable
+                                Diffusion</a>
+                            <!-- 链接5 -->
+                            <a class="link" href="https://js.design/workspace">即时设计</a>
+                            <!-- 链接6 -->
+                            <!-- <a class="link" href="link6.html">链接6</a> -->
+                            <!-- 链接7 -->
+                            <!-- <a class="link" href="link7.html">链接7</a> -->
+                            <!-- 链接8 -->
+                            <!-- <a class="link" href="link8.html">链接8</a> -->
+                            <!-- 链接9 -->
+                            <!-- <a class="link" href="link9.html">链接9</a> -->
+                            <!-- 链接10 -->
+                            <!-- <a class="link" href="link10.html">链接10</a> -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingFore">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseFore" aria-expanded="false" aria-controls="flush-collapseFore">
+                        成果展示
+                    </button>
+                </h2>
+                <div id="flush-collapseFore" class="accordion-collapse collapse" aria-labelledby="flush-headingFore"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="container">
+                        <h2></h2>
+                        <div class="links">
+                            <!-- 链接1 -->
+                            <a class="link" href="https://hsygg.gitee.io/kechengbiao">课程表</a>
+                            <!-- 链接2 -->
+                            <a class="link" href="https://hsygg.gitee.io/yinyangshi">阴阳师抽卡模拟器</a>
+                            <!-- 链接3 -->
+                            <a class="link" href="https://hsygg.gitee.io/daxiang">大象收益计算器</a>
+                            <!-- 链接4 -->
+                            <a class="link" href="https://hsygg.gitee.io/countdown/">倒计时</a>
+                            <!-- 链接5 -->
+                            <a class="link" href="https://hsygg.gitee.io/shuangseqiu">双色球</a>
+                            <!-- 链接6 -->
+                            <a class="link" href="https://hsygg.gitee.io/boygirl">生男生女我知道</a>
+                            <!-- 链接7 -->
+                            <a class="link" href="https://hsygg.gitee.io/news">大象新闻</a>
+                            <!-- 链接8 -->
+                            <a class="link" href="https://hsygg.gitee.io/daxue">追忆大学美好时光</a>
+                            <!-- 链接9 -->
+                            <a class="link" href="https://hsygg.gitee.io/shuinichang">水泥厂的孩子们</a>
+                            <!-- 链接10 -->
+                            <a class="link" href="https://hsygg.gitee.io/shouxieban/">手写板</a>
+                            <!-- 链接11 -->
+                            <a class="link" href="https://hsygg.gitee.io/song/">悠悠点歌台</a>
+                            <!-- 链接12 -->
+                            <a class="link" href="https://hsygg.gitee.io/pzsc/">车牌照生成</a>
+                            <!-- 链接13 -->
+                            <a class="link" href="https://hsygg.gitee.io/xqxc/">相亲相册</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingFive">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                        友情链接
+                    </button>
+                </h2>
+                <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="container">
+                        <h2></h2>
+                        <div class="links">
+                            <!-- 链接1 -->
+                            <a class="link" href="https://duhengsheng.gitee.io/count">爱算数和猜数字小游戏
+                            </a>
+                            <!-- 链接2 -->
+                            <a class="link" href="https://duhengsheng.gitee.io/mynavigation">我做过的网页
+                            </a>
+                            <!-- 链接3 -->
+                            <a class="link" href="https://duhengsheng.gitee.io/daxiang">大象新闻复制</a>
+                            <!-- 链接4 -->
+                            <a class="link" href="https://duhengsheng.gitee.io/mu4yu2">电子木鱼</a>
+                            <!-- 链接5 -->
+                            <a class="link" href="https://duhengsheng.gitee.io/new-year2">新年</a>
+                            <!-- 链接6 -->
+                            <!-- <a class="link" href="link6.html">链接6</a> -->
+                            <!-- 链接7 -->
+                            <!-- <a class="link" href="link7.html">链接7</a> -->
+                            <!-- 链接8 -->
+                            <!-- <a class="link" href="link8.html">链接8</a> -->
+                            <!-- 链接9 -->
+                            <!-- <a class="link" href="link9.html">链接9</a> -->
+                            <!-- 链接10 -->
+                            <!-- <a class="link" href="link10.html">链接10</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingSix">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+                        心路历程
+                    </button>
+                </h2>
+                <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="container">
+                        <h2></h2>
+                        <div class="leg1">
+                            <div class="leg2">
+                                拥抱AI新技术，感受AI创造力。
+                            </div>
+                            <div class="legday"> ------2023.9.22</div>
+
+                            <div class="leg2">
+                                第四次工业革命：人工智能。
+                            </div>
+                            <div class="legday"> ------2023.9.22</div>
+                            <div class="leg2">
+                                欢迎来到YangGG学习网! ！！！ 保持学习、坚持学习、以兴趣驱动学习。
+                            </div>
+                            <div class="legday"> ------2023.9.22</div>
+
+                            <div class="leg2">
+                                截止2023年9月22日，共计2周基本学完HTML和CSS，准备攻克JS。
+                            </div>
+                            <div class="legday"> ------2023.9.22</div>
+
+
+                            <div class="leg2">
+                                祝大家中秋节国庆节双节快乐！
+                            </div>
+                            <div class="legday"> ------2023.9.22</div>
+
+                            <div class="leg2">
+                                人到底能有多厚颜无耻不得而知！
+                            </div>
+                            <div class="legday">------2023.9.29 </div>
+
+                            <div class="leg2">
+                                今天学完了JS的各种循环。。。下面是函数！
+                            </div>
+                            <div class="legday">------2023.9.29 </div>
+                            <div class="leg2">
+                                前端三件套基础知识基本学完，到此画个句号，结合ChatGPT来完成各种网页制作。
+                            </div>
+                            <div class="legday">------2023.10.10 </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+    <footer>
+        <div> &copy; 2023-2024 Yangge. All Rights Reserved.</div>
+    </footer>
+
+    <script>
+        // 获取所有的 <a> 标签
+        const allLinks = document.querySelectorAll('a');
+
+        // 为每个链接添加 target 属性
+        allLinks.forEach(link => {
+            link.setAttribute('target', '_blank'); // 在新标签页中打开链接
+        });
+        // 百度搜索跳转
+        function searchBaidu() {
+            let query = document.getElementById("searchQuery").value;
+            if (query.trim() !== "") {
+                let url = "https://www.baidu.com/s?wd=" + encodeURIComponent(query);
+                window.location.href = url;
+            }
+        }
+    </script>
+</body>
+<div id="osc-gitee-widget-tag"></div>
+<div style=" width: 50px;"></div>
+
+</html>
