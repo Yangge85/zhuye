@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>收益计算器</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            margin: 30px auto;
+            padding: 15px;
+            max-width: 400px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+            margin-right: 10px;
+            text-align: left;
+            width: 40%;
+            /* 保持标签的宽度一致 */
+        }
+
+        input[type="number"],
+        input[type="range"] {
+            width: 55%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="range"] {
+            width: 80%;
+            /* 拖拽条占满宽度 */
+            margin-top: 5px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+
+        button {
+            width: 18%;
+            padding: 5px;
+            background-color: #333;
+            /* 黑色水晶按钮 */
+            color: #fff;
+            font-size: 10px;
+            /* 字号调整为10px */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #555;
+            /* 鼠标悬停颜色 */
+        }
+
+        .percent-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .percent-group label,
+        .percent-group output {
+            width: 45%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>收益计算器</h2>
+
+        <div class="input-group">
+            <label for="totalCapital">总资金：</label>
+            <input type="number" id="totalCapital" placeholder="输入总资金" />
+        </div>
+
+        <div class="input-group">
+            <label for="rateOfReturn">收益率：</label>
+            <input type="number" id="rateOfReturnInput" min="0" max="300" placeholder="输入收益率" />
+        </div>
+        <input type="range" id="rateOfReturn" min="0" max="300" value="5" />
+
+        <div class="input-group">
+            <label for="earnings">收益：</label>
+            <input type="number" id="earningsInput" placeholder="输入收益" />
+        </div>
+        <input type="range" id="earningsRange" min="0" max="3000000" value="0" />
+
+        <div class="input-group">
+            <label for="totalAsset">总资产：</label>
+            <input type="number" id="totalAssetInput" placeholder="输入总资产" />
+        </div>
+        <input type="range" id="totalAssetRange" min="0" max="50000000" value="0" />
+
+        <div class="percent-group">
+            <label for="shareA">A 百分比：</label>
+            <input type="number" id="shareA" value="50" />
+        </div>
+        <div class="percent-group">
+            <label for="shareB">B 百分比：</label>
+            <input type="number" id="shareB" value="50" />
+        </div>
+
+        <div class="percent-group">
+            <label for="earningsA">收益 A：</label>
+            <output id="earningsA">0</output>
+        </div>
+        <div class="percent-group">
+            <label for="earningsB">收益 B：</label>
+            <output id="earningsB">0</output>
+        </div>
+
+        <div class="buttons">
+            <button id="button1">35%//65%</button>
+            <button id="button2">20%//80%</button>
+            <button id="button3">30%//70%</button>
+            <button id="button4">40%//60%</button>
+            <button id="button5">50%//50%</button>
+        </div>
+    </div>
+
+    <script>
+        const totalCapital = document.getElementById('totalCapital');
+        const rateOfReturnInput = document.getElementById('rateOfReturnInput');
+        const rateOfReturn = document.getElementById('rateOfReturn');
+        const earningsInput = document.getElementById('earningsInput');
+        const earningsRange = document.getElementById('earningsRange');
+        const totalAssetInput = document.getElementById('totalAssetInput');
+        const totalAssetRange = document.getElementById('totalAssetRange');
+        const shareA = document.getElementById('shareA');
+        const shareB = document.getElementById('shareB');
+        const earningsAOutput = document.getElementById('earningsA');
+        const earningsBOutput = document.getElementById('earningsB');
+
+        let manualEarningsInput = false; // 判断是否是手动输入收益
+        let manualAssetInput = false; // 判断是否是手动输入总资产
+
+        rateOfReturn.addEventListener('input', () => {
+            rateOfReturnInput.value = rateOfReturn.value;
+            if (!manualEarningsInput && !manualAssetInput) {
+                calculateEarnings();
+            }
+        });
+
+        rateOfReturnInput.addEventListener('input', () => {
+            rateOfReturn.value = rateOfReturnInput.value;
+            if (!manualEarningsInput && !manualAssetInput) {
+                calculateEarnings();
+            }
+        });
+
+        earningsInput.addEventListener('input', () => {
+            manualEarningsInput = true;
+            manualAssetInput = false;
+            earningsRange.value = earningsInput.value;
+            calculateRateFromEarnings();
+        });
+
+        earningsRange.addEventListener('input', () => {
+            earningsInput.value = earningsRange.value;
+            manualEarningsInput = true;
+            calculateRateFromEarnings();
+        });
+
+        totalAssetInput.addEventListener('input', () => {
+            manualAssetInput = true;
+            totalAssetRange.value = totalAssetInput.value;
+            calculateFromTotalAsset();
+        });
+
+        totalAssetRange.addEventListener('input', () => {
+            totalAssetInput.value = totalAssetRange.value;
+            manualAssetInput = true;
+            calculateFromTotalAsset();
+        });
+
+        totalCapital.addEventListener('input', () => {
+            if (!manualEarningsInput && !manualAssetInput) {
+                calculateEarnings();
+            }
+        });
+
+        function calculateEarnings() {
+            const total = parseFloat(totalCapital.value) || 0;
+            const rate = parseFloat(rateOfReturnInput.value) / 100;
+            const earnings = total * rate;
+
+            if (!manualEarningsInput) {
+                earningsInput.value = earnings.toFixed(2);
+                earningsRange.value = earnings.toFixed(2);
+            }
+            totalAssetInput.value = (total + earnings).toFixed(2);
+            totalAssetRange.value = (total + earnings).toFixed(2);
+            calculateShares(earnings);
+        }
+
+        function calculateRateFromEarnings() {
+            const total = parseFloat(totalCapital.value) || 0;
+            const earnings = parseFloat(earningsInput.value) || 0;
+            const rate = (earnings / total) * 100;
+
+            rateOfReturnInput.value = rate.toFixed(2);
+            rateOfReturn.value = rate.toFixed(2);
+            totalAssetInput.value = (total + earnings).toFixed(2);
+            totalAssetRange.value = (total + earnings).toFixed(2);
+            calculateShares(earnings);
+        }
+
+        function calculateFromTotalAsset() {
+            const total = parseFloat(totalCapital.value) || 0;
+            const totalAsset = parseFloat(totalAssetInput.value) || 0;
+            const earnings = totalAsset - total;
+            const rate = (earnings / total) * 100;
+
+            earningsInput.value = earnings.toFixed(2);
+            earningsRange.value = earnings.toFixed(2);
+            rateOfReturnInput.value = rate.toFixed(2);
+            rateOfReturn.value = rate.toFixed(2);
+            calculateShares(earnings);
+        }
+
+        function calculateShares(earnings) {
+            const shareAPercent = parseFloat(shareA.value) / 100;
+            const shareBPercent = parseFloat(shareB.value) / 100;
+
+            const earningsA = earnings * shareAPercent;
+            const earningsB = earnings * shareBPercent;
+
+            earningsAOutput.textContent = earningsA.toFixed(2);
+            earningsBOutput.textContent = earningsB.toFixed(2);
+        }
+
+        document.getElementById('button1').addEventListener('click', () => {
+            shareA.value = 35;
+            shareB.value = 65;
+            calculateShares(earningsInput.value);
+        });
+
+        document.getElementById('button2').addEventListener('click', () => {
+            shareA.value = 20;
+            shareB.value = 80;
+            calculateShares(earningsInput.value);
+        });
+
+        document.getElementById('button3').addEventListener('click', () => {
+            shareA.value = 30;
+            shareB.value = 70;
+            calculateShares(earningsInput.value);
+        });
+
+        document.getElementById('button4').addEventListener('click', () => {
+            shareA.value = 40;
+            shareB.value = 60;
+            calculateShares(earningsInput.value);
+        });
+
+        document.getElementById('button5').addEventListener('click', () => {
+            shareA.value = 50;
+            shareB.value = 50;
+            calculateShares(earningsInput.value);
+        });
+    </script>
+
+</body>
+
+</html>
